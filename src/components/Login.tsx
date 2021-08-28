@@ -10,13 +10,16 @@ import {Wrapper} from './Login.styles'
 
 import { Context } from '../Context';
 
-const Login = () => {
+
+const Login: React.FC = () => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
 
-  const [_user, setUser] = useContext(Context);
+  //@ts-ignore
+  // eslint-disable-next-line
+  const [user, setUser] = useContext(Context);
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
@@ -33,20 +36,23 @@ const Login = () => {
 
       navigate('/');
     } catch (error) {
+      console.error(error);
       setError(true);
     }
   }
 
-  const handleInput = (e) => {
-    const name = e.currentTarget.name;
-    const value = e.currentTarget.value;
+  const handleInput = (e: any) => {
+    const name = e?.currentTarget?.name ;
+    const value = e?.currentTarget?.value;
     if (name === 'username') setUsername(value);
     if (name === 'password') setPassword(value);
+    console.log('campo>: ', name, value);
   }
 
   return (
     <Wrapper>
       {error && <div className="error">There was an Error on the login</div>}
+      <h3>Login into<a href="https://www.themoviedb.org/">The Movie DB</a></h3>
       <label>Username:</label>
       <input
         type="text"

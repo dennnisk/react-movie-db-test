@@ -6,7 +6,7 @@ import TMDBLogo from '../../images/tmdb_logo.svg';
 import { Wrapper, Content, LogoImg, TMDBLogoImg } from './Header.styles';
 import { Context } from '../../Context';
 
-const Header = () => {
+const Header: React.FC = () => {
 
   const [user] = useContext(Context);
 
@@ -18,7 +18,6 @@ const Header = () => {
         <Link to="/">
           <LogoImg src={RMDBLogo} alt='rmdb-logo' />
         </Link>
-
         {
           user ? (
             <span> Welcome {user.username}</span>
@@ -28,8 +27,9 @@ const Header = () => {
             </Link>
           )
         }
-
-        <TMDBLogoImg src={TMDBLogo} alt='tmdb-logo' />
+        <a href="https://www.themoviedb.org/" target="_blank">
+          <TMDBLogoImg src={TMDBLogo} alt='tmdb-logo' />
+        </a>
       </Content>
     </Wrapper>
   );

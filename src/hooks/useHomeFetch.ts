@@ -1,18 +1,13 @@
 // eslint-disable-next-line
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
-import API from '../API'
+import API, {Movie} from '../API'
 // helper
 import {isPersistedState} from '../helpers';
 
-// eslint-disable-next-line
-import { POSTER_SIZE, BACKDROP_SIZE, IMAGE_BASE_URL } from '../config'
-// eslint-disable-next-line
-import NoImage from '../images/no_image.jpg'
-
 const initialState = {
   page: 0,
-  results: [],
+  results: [] as Movie[],
   total_pages: 0,
   total_results: 0
 };
@@ -32,7 +27,7 @@ export const useHomeFetch = () => {
     
     //console.log(searchTerm);
 
-    const fetchMovies = async (page, searchTerm = "") => {
+    const fetchMovies = async (page: number, searchTerm = "") => {
       try {
         setError(false);
         setLoading(true);

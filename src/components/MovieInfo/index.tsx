@@ -1,26 +1,39 @@
-import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
+import React, {useContext} from 'react';
 import {Wrapper, Content, Text} from './MovieInfo.styles'
 
 import Thumb from '../Thumb';
 import Spinner from '../Spinner';
 import Rate from '../Rate';
-import API from '../../API';
 
 import { IMAGE_BASE_URL, POSTER_SIZE } from '../../config';
 
 import NoImage from '../../images/no_image.jpg';
 
-import { Context } from '../../Context';
+import {MovieState} from '../../hooks/useMovieFetch';
+import {Context} from '../../Context';
+import API from '../../API';
+import { useState } from 'react';
 
-const MovieInfo = ({movie}) => {
+type Props = {
+  movie: MovieState
+}
+
+const MovieInfo: React.FC<Props> = ({movie}) => {
 
   const [user] = useContext(Context);
+  const [sendingRate, setSendingRate] = useState(false);
 
-  const handleRatting = async (value) => {
-    
-    const rate = await API.rateMovie(user.sessionId, movie.id, value);
-    console.log(rate);
+  console.log('userData:', user);
+
+  const handleRatting = async (value: any) => {
+    try {
+      setSendingRate(true);
+      const rate = await API.rateMovie(user.sessionId, movie.id, value);
+      console.log('rate:', rate);
+      
+    } finally {
+      setSendingRate(false);
+    }
   }
 
   return (
@@ -45,7 +58,12 @@ const MovieInfo = ({movie}) => {
 
               {console.log(movie)}
               <div className="director">
-                <h3>DIRECTOR {(movie && movie.directors && (movie.directors?.lenth) > 1) ? 'S': '' }</h3>
+                
+                <h3>DIRECTOR {
+                //@ts-ignore
+                (movie && movie.directors && (movie.directors.lenth) > 1) ? 'S': '' 
+                
+                }</h3>
                 {
                   (movie && movie.directors) ?
                     movie.directors.map(d => (
@@ -56,24 +74,23 @@ const MovieInfo = ({movie}) => {
               </div>
             </div>
             {
-              user && 
-              <div>
-                <p>
-                  Rate movie
-                </p>
-                <Rate callback={handleRatting} />
-              </div>
-            }
+                user && 
+                <div className="rate">
+                  <h3>
+                    RATE MOVIE
+                  </h3>
+                  {sendingRate ? (
+                    <div><Spinner smaller={true}></Spinner> Enviando...</div>
+                  ) : (
+                    <Rate callback={handleRatting} />
+                  )}
+
+                </div>
+              }            
           </Text>
       </Content>
     </Wrapper>
   )
 }
-
-
-MovieInfo.prototype = {
-  movie: PropTypes.object
-}
-
 
 export default MovieInfo;

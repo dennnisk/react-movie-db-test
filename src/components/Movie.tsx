@@ -19,7 +19,7 @@ import { useMovieFetch } from '../hooks/useMovieFetch'
 // eslint-disable-next-line
 import NoImage from '../images/no_image.jpg';
 
-const Movie = () => {
+const Movie : React.FC = () => {
 
   const { movieId } = useParams();
 
@@ -35,16 +35,17 @@ const Movie = () => {
       <MovieInfoBar time={movie.runtime} budget={movie.budget} revenue={movie.revenue} />
       <Grid header="Actors">
         {
-          (movie && movie.actors && movie.actors.length > 0) ?
+         (movie && movie.actors && movie.actors.length > 0) ?
             movie.actors.map(actor => (
               <Actor 
                 key={actor.credit_id}
                 name={actor.name}
-                caracter={actor.caracter}
+                caracter={actor.character}
                 imageUrl={actor.profile_path ? `${IMAGE_BASE_URL}${POSTER_SIZE}${actor.profile_path}` : NoImage}
               />
             ))
           : <Spinner />
+                  
         }
       </Grid>
     </div>

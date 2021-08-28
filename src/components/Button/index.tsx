@@ -1,9 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { Wrapper} from './Button.styles'
+// types
+type props = {
+  text: string;
+  callback: () => void;
+}
 
-const Button = ({text, callback}) => {
+const Button: React.FC<props> = ({text, callback}) => {
 
   return (
     <Wrapper type="button" onClick={callback}>
@@ -12,11 +16,6 @@ const Button = ({text, callback}) => {
   )
 
 };
-
-Button.prototype = {
-  text: PropTypes.string,
-  callback: PropTypes.func
-}
 
 
 export default Button;

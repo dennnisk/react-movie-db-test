@@ -1,7 +1,11 @@
 import styled from 'styled-components';
 import { IMAGE_BASE_URL, BACKDROP_SIZE } from '../../config';
 
-export const Wrapper = styled.div`
+type Props = {
+  backdrop: string;
+}
+
+export const Wrapper = styled.div<Props>`
   background: ${(props) =>
     props.backdrop
       ? `url('${IMAGE_BASE_URL}${BACKDROP_SIZE}${props.backdrop}')`
@@ -64,6 +68,40 @@ export const Text = styled.div`
 
     p {
       margin: 0;
+    }
+  }
+
+  .rate {
+    margin: 40px 0 0 0px;
+
+    p {
+      margin: 0;
+    }
+
+    button {
+      display: block;
+      background: var(--white);
+      width: 25%;
+      min-width: 100px;
+      max-width: 100px;
+      height: 30px;
+      border-radius: 10px;
+      color: var(--darkGrey);
+      border: 0;
+      font-size: var(--fontSmall);
+      margin: 25px 0 0 30px;
+      transition: all 0.3s;
+      outline: none;
+      cursor: pointer;
+
+      :hover {
+        opacity: 0.8;
+      }
+    }
+
+    input {
+      margin: 0 25px 0 30px;
+      width: 35%;
     }
   }
 

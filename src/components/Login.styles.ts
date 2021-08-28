@@ -6,8 +6,8 @@ export const Wrapper = Styled.div`
   justify-content: center;
   flex-direction: column;
   margin: 0 auto;
-  max-width: 320px;
-  padding: 20px;
+  max-width: 400px;
+  padding: 15px;
   color: var(--darkGrey);
 
   input {
@@ -21,5 +21,21 @@ export const Wrapper = Styled.div`
 
   .error {
     color: red;
+  }
+
+  h3 {
+    width: 100%;
+    padding: 20px 40px;
+    color: var(--darkGrey);
+    overflow: hidden;
+
+    @media screen and (max-width: 768px) {
+      font-size: var(--fontBig);
+    }
+
+    a {
+      color: var(--darkGrey);
+      text-decoration: none;
+    }
   }
 `;

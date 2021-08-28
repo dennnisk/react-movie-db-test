@@ -16,7 +16,7 @@ import Button from './Button';
 
 import {useHomeFetch} from '../hooks/useHomeFetch'
 
-const Home = () => {
+const Home: React.FC = () => {
 
   // eslint-disable-next-line
   const { state, loading, error, setSearchTerm, searchTerm, setIsLoadingMore } = useHomeFetch();
