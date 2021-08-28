@@ -17,12 +17,18 @@ const initialState = {
 
 export const useHomeFetch = () => {
     // eslint-disable-next-line
+    const [ searchTerm, setSearchTerm ] = useState('');
+    // eslint-disable-next-line
     const [ state, setState ] = useState(initialState);
     // eslint-disable-next-line
     const [ loading, setLoading ] = useState(false);
     // eslint-disable-next-line
     const [ error, setError ] = useState(false);
+
+    const [isLoadingMore, setIsLoadingMore] = useState(false);
     
+    //console.log(searchTerm);
+
     const fetchMovies = async (page, searchTerm = "") => {
       try {
         setError(false);
@@ -47,9 +53,19 @@ export const useHomeFetch = () => {
   
     // Run at the start of the component
     useEffect(() => {
-      fetchMovies(1);
-    }, []);
+      setState(initialState);
+      fetchMovies(1, searchTerm);
+    }, [searchTerm]);
 
-    return { state, loading, error };
+    // Load More
+    useEffect(() => {
+      if (!isLoadingMore) return;
+
+      fetchMovies(state.page+1, searchTerm);
+      setIsLoadingMore(false);
+
+    }, [isLoadingMore, state.page, searchTerm]);
+
+    return { state, loading, error, setSearchTerm, searchTerm, setIsLoadingMore };
   
 }

@@ -41,7 +41,7 @@ export const Text = styled.div`
   color: var(--white);
   overflow: hidden;
 
-  .rating-director {
+  .rating-directors {
     display: flex;
     justify-content: flex-start;
   }
@@ -56,7 +56,7 @@ export const Text = styled.div`
     color: #000;
     font-weight: 800;
     border-radius: 25px;
-    margin: 0px 0 0 0;
+    margin: 50px 0 0 -40px;
   }
 
   .director {
