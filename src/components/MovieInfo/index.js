@@ -1,15 +1,27 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import {Wrapper, Content, Text} from './MovieInfo.styles'
 
 import Thumb from '../Thumb';
 import Spinner from '../Spinner';
+import Rate from '../Rate';
+import API from '../../API';
 
 import { IMAGE_BASE_URL, POSTER_SIZE } from '../../config';
 
 import NoImage from '../../images/no_image.jpg';
 
+import { Context } from '../../Context';
+
 const MovieInfo = ({movie}) => {
+
+  const [user] = useContext(Context);
+
+  const handleRatting = async (value) => {
+    
+    const rate = await API.rateMovie(user.sessionId, movie.id, value);
+    console.log(rate);
+  }
 
   return (
     <Wrapper backdrop={movie.backdrop_path}>
@@ -43,6 +55,15 @@ const MovieInfo = ({movie}) => {
                 }
               </div>
             </div>
+            {
+              user && 
+              <div>
+                <p>
+                  Rate movie
+                </p>
+                <Rate callback={handleRatting} />
+              </div>
+            }
           </Text>
       </Content>
     </Wrapper>
