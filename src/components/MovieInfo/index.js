@@ -1,5 +1,5 @@
 import React from 'react';
-//import {Link } from 'react-router-dom'
+import PropTypes from 'prop-types';
 import {Wrapper, Content, Text} from './MovieInfo.styles'
 
 import Thumb from '../Thumb';
@@ -10,7 +10,6 @@ import { IMAGE_BASE_URL, POSTER_SIZE } from '../../config';
 import NoImage from '../../images/no_image.jpg';
 
 const MovieInfo = ({movie}) => {
-
 
   return (
     <Wrapper backdrop={movie.backdrop_path}>
@@ -43,15 +42,17 @@ const MovieInfo = ({movie}) => {
                   : <Spinner />
                 }
               </div>
-
             </div>
-            
-
           </Text>
       </Content>
     </Wrapper>
   )
-
 }
+
+
+MovieInfo.prototype = {
+  movie: PropTypes.object
+}
+
 
 export default MovieInfo;
