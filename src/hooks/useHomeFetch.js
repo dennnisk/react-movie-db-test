@@ -2,6 +2,9 @@
 import React, { useState, useEffect } from 'react';
 
 import API from '../API'
+// helper
+import {isPersistedState} from '../helpers';
+
 // eslint-disable-next-line
 import { POSTER_SIZE, BACKDROP_SIZE, IMAGE_BASE_URL } from '../config'
 // eslint-disable-next-line
@@ -53,6 +56,18 @@ export const useHomeFetch = () => {
   
     // Run at the start of the component
     useEffect(() => {
+      // If not searching (will we not store), load the data feched before
+      if (!searchTerm) {
+        // Load from sessionStorage
+        const sessionState = isPersistedState('homeState');
+        // if Exists
+        if (sessionState) {
+          console.log('Loading from sessionStorage')
+          // Save to the state, to show the data that whore loaded before
+          setState(sessionState);
+          return;
+        }
+      }
       setState(initialState);
       fetchMovies(1, searchTerm);
     }, [searchTerm]);
@@ -60,11 +75,20 @@ export const useHomeFetch = () => {
     // Load More
     useEffect(() => {
       if (!isLoadingMore) return;
-
+      
       fetchMovies(state.page+1, searchTerm);
       setIsLoadingMore(false);
-
+      
     }, [isLoadingMore, state.page, searchTerm]);
+    
+    // write the sessionStorage
+    useEffect(() => {
+      if (!searchTerm) {
+        sessionStorage.setItem('homeState', JSON.stringify(state));
+      }
+    }, [searchTerm, state]);
+    
+
 
     return { state, loading, error, setSearchTerm, searchTerm, setIsLoadingMore };
   
