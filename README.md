@@ -1,10 +1,19 @@
 # React Movie Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was made to test React, using the free API from https://www.themoviedb.org/
 
+![APP Exemple](https://github.com/dennnisk/react-movie-db-test/blob/main/rmdbExplorerShow.gif?raw=true)
+
+---
+
+## Objective
+
+Create a react app from scracth. To test load data from the api (like themoviedb.org), show data the user, control state, etc.
+
+---
 ## To start the project
 
-In the project directory, you can, clone de the project, then run:
+Clone, then run:
 
 ### `npm install`
 
@@ -12,6 +21,7 @@ In the project directory, you can, clone de the project, then run:
 
 Access [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-## Objective
+---
 
-To create a react app that can load data from the api (like themoviedb.org) and show to the user, control state, data modification, etc.
+#### Credit: [React JS Course for Beginners](https://www.youtube.com/watch?v=nTeuhbP7wdE)
+
