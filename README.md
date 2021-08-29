@@ -1,6 +1,6 @@
 # React Movie Project
 
-This project was made to test React, using the free API from https://www.themoviedb.org/
+This project was made to test React using the free API [The Movie DB](https://www.themoviedb.org/)
 
 ![APP Exemple](https://github.com/dennnisk/react-movie-db-test/blob/main/rmdbExplorerShow.gif?raw=true)
 
@@ -8,16 +8,20 @@ This project was made to test React, using the free API from https://www.themovi
 
 ## Objective
 
-Create a react app from scracth. To test load data from the api (like themoviedb.org), show data the user, control state, etc.
+Create a react app from scratch, load data from the api (like themoviedb.org), show the user, control state, control context, etc.
 
 ---
 ## To start the project
 
-Clone, then run:
+```Shell
+\> git clone https://github.com/dennnisk/react-movie-db-test.git
 
-### `npm install`
+\> cd react-movie-db-test
 
-### `yarn start`
+\> npm install
+
+\> yarn start
+```
 
 Access [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
